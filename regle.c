@@ -80,7 +80,7 @@ void ValeurImpossibleZone(FILE* f, Grille *g, Zone* zoneCourante){
 
 
 
-void ValeurImpossibleCroix(FILE* f, Grille *g, Zone* zoneCourante){
+/*void ValeurImpossibleCroix(FILE* f, Grille *g, Zone* zoneCourante){
 	if(zoneCourante==NULL){
 		return;
 	}
@@ -120,7 +120,7 @@ void ValeurImpossibleCroix(FILE* f, Grille *g, Zone* zoneCourante){
 	ValeurImpossibleCroix(f,g,zoneCourante);
 	}
 }
-
+*/
 
 
 

@@ -12,4 +12,4 @@ void ValeurPossible(FILE* f, Grille* g, Zone* zoneCourante);
 void ValeurImpossibleZone(FILE* f, Grille *g, Zone* zoneCourante);
 
 
-void ValeurImpossibleCroix(FILE* f, Grille *g, Zone* zoneCourante);
+/*void ValeurImpossibleCroix(FILE* f, Grille *g, Zone* zoneCourante);*/
