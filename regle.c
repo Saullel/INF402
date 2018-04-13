@@ -2,16 +2,21 @@
 
 
 
+int ValeurX(int numCase, int valeurCase, int nombreCasesTotal){
+	return ((nombreCasesTotal*(valeurCase-1))+(numCase + 1));
+}
+
 
 void ValeurDonnee(FILE* f, Grille* g){
 	int i, j;
+	int gn=NombreCaseGrille(g);
 	int numCaseCourante, valeurCaseCourante;
 	for(i=0;i<HauteurGrille(g);i++){
 		for(j=0;j<LargeurGrille(g);j++){
 			valeurCaseCourante=ValCase(g,i,j);
 			if(valeurCaseCourante!=0){
 				numCaseCourante=NumCase(g,i,j);
-				fprintf(f,"x(%d, %d) 0\n",numCaseCourante,valeurCaseCourante);
+				fprintf(f,"%d 0\n",ValeurX(numCaseCourante,valeurCaseCourante, gn));
 			}
 		}
 	}
@@ -22,10 +27,11 @@ void ValeurPossible(FILE* f, Grille* g, Zone* zoneCourante){
 	if(zoneCourante==NULL){
 		return;
 	}
+    int gn=NombreCaseGrille(g);
 	int numCaseCourante;
 	int valPossibleMax=CaseMaxZone(ZoneTete(g));
 	int i=0;
-	while(i<NombreCaseGrille(g) && ZoneCase(g,i)!=NumZone(zoneCourante)) {
+	while(i<gn && ZoneCase(g,i)!=NumZone(zoneCourante)) {
 		i++;
 	}
 	int nbCaseZone=NombreCaseZone(zoneCourante);
@@ -33,13 +39,13 @@ void ValeurPossible(FILE* f, Grille* g, Zone* zoneCourante){
 	while(numCaseCourante!=-1){
 		for (i=1;i<=nbCaseZone;i++)
 		{
-			fprintf(f,"x(%d, %d) ",numCaseCourante,i);
+			fprintf(f,"%d ",ValeurX(numCaseCourante,i, gn));
 		}
 		fprintf(f, "0\n");
 		
 		for (i=nbCaseZone+1;i<=valPossibleMax;i++)
 		{
-			fprintf(f,"-x(%d, %d) 0\n",numCaseCourante,i);
+			fprintf(f,"-%d 0\n",ValeurX(numCaseCourante,i, gn));
 		}
 		
 		numCaseCourante=CaseSuivanteZone(g,numCaseCourante);
@@ -53,6 +59,7 @@ void ValeurImpossibleZone(FILE* f, Grille *g, Zone* zoneCourante){
 	if(zoneCourante==NULL){
 		return;
 	}
+    int gn=NombreCaseGrille(g);
 	int numCaseCourante, numCaseSuivante;
 	int nbCaseZone=NombreCaseZone(zoneCourante);
 	int i=0;
@@ -67,7 +74,7 @@ void ValeurImpossibleZone(FILE* f, Grille *g, Zone* zoneCourante){
 		while(numCaseSuivante!=-1)
 		{
 			for(i=1;i<=nbCaseZone;i++){
-				fprintf(f,"-x(%d, %d) -x(%d,%d) 0\n",numCaseCourante,i,numCaseSuivante,i);
+				fprintf(f,"-%d -%d 0\n",ValeurX(numCaseCourante,i, gn),ValeurX(numCaseSuivante,i, gn));
 			}
 			numCaseSuivante=CaseSuivanteZone(g,numCaseSuivante);
 		}
@@ -121,28 +128,6 @@ void ValeurImpossibleZone(FILE* f, Grille *g, Zone* zoneCourante){
 	}
 }
 */
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

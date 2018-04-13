@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include "grille.h"
 
+int ValeurX(int numCase, int valeurCase, int nombreCasesTotal);
 
 //ecrit les valeur des cases pre-remplies
 void ValeurDonnee(FILE* f, Grille *g);
