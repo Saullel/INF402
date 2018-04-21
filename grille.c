@@ -175,7 +175,7 @@ Grille* LireGrille(FILE* f){
 	return g;
 }
 
-void AfficherGrille(Grille *g){
+void AfficherGrilleBrute(Grille *g){
 	int i,j;
 	for (i=0;i<HauteurGrille(g);i++){
 		for(j=0;j<LargeurGrille(g);j++){
@@ -186,3 +186,61 @@ void AfficherGrille(Grille *g){
 }
 
 
+void AfficherGrille(Grille *g){
+	int nbCaseGrille=NombreCaseGrille(g);
+	int zonePrecedente,zoneCourante;
+	int numCase=0,i,val=0;
+	int positionCase=0;
+	for(i=0;i<HauteurGrille(g);i++){
+		printf("\n");
+	}
+	printf("\t\t\t\t-");
+	for(i=0;i<LargeurGrille(g);i++){
+		printf("~~~~");
+	}
+	printf("\n");
+	zonePrecedente=-1;
+	zoneCourante=-1;
+	while (numCase<nbCaseGrille){
+		zonePrecedente=zoneCourante;
+		zoneCourante=ZoneCase(g,numCase);
+		positionCase=numCase%LargeurGrille(g);
+		val=ValCase(g,(numCase-positionCase)/HauteurGrille(g),positionCase);
+		if(positionCase==0){
+			printf("\t\t\t\t|");
+			if (val==0)
+				printf(" . ");
+			else
+				printf(" %d ",val );
+		}
+		else {
+			if(zonePrecedente==zoneCourante){
+				printf(" ");
+			}
+			else{
+				printf("|");
+			}
+			if (val==0)
+				printf(" . ");
+			else
+				printf(" %d ",val );			
+			if (positionCase==LargeurGrille(g)-1){//gestion fin de ligne
+				printf("|\n\t\t\t\t");
+				for(i=1;i<=LargeurGrille(g);i++){
+					if(ZoneCase(g,numCase-LargeurGrille(g)+i)==ZoneCase(g,numCase+i)){
+						printf("    ");
+					}
+					else {
+						printf("~~~~");
+					}
+				}
+				printf("\n");
+			}
+		}
+		numCase++;
+	}
+	for(i=0;i<HauteurGrille(g);i++){
+		printf("\n");
+	}
+	
+}
