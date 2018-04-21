@@ -6,23 +6,20 @@ int max(int a, int b){
 	}
 	else return b;
 }
-// Recuperer la longueur de la grille
+
 int HauteurGrille(Grille *g){
 	return g->hauteur;
 }
 
-// Recuperer la largeur de la grille
 int LargeurGrille(Grille *g){
 	return g->largeur;
 }
 
-	
-// Recuperer le nombre de zones de la grille 
 int NombreZone(Grille *g){
 	return g->nbZones;
 }
 
-// Recuperer le nb de cases par zone
+
 int NombreCaseZone(Zone *z){
 		return z->nbCase;
 }
@@ -135,29 +132,30 @@ Grille* LireGrille(FILE* f){
 	}	
 
 	int i,j;
-	//lecture des valeurs des cases
 	int val=0;
-	for (i=0;i<HauteurGrille(g);i++){
+	for (i=0;i<HauteurGrille(g);i++){ //lecture des valeurs des cases
 		for(j=0;j<LargeurGrille(g);j++){
 			fscanf(f,"%d",&val);
 			AffecterValeur(g,val,i,j);
 		}
 	}
-	//lecture de la zone pour chaque case
-	for(i=0;i<HauteurGrille(g);i++){
+	
+	for(i=0;i<HauteurGrille(g);i++){ //lecture de la zone pour chaque case
 		for(j=0;j<LargeurGrille(g);j++){
 			fscanf(f,"%d",&val);
 			g->zoneCase[NumCase(g,i,j)]=val;
 		}
 	}
-	int zoneCaseCourante=ZoneCase(g,0);
+	
+	int zoneCaseCourante=ZoneCase(g,0);	//creation de la premiere zone
 	Zone* zNouveau;
 	zNouveau=InitZone();
 	AffecterNumZone(zNouveau,zoneCaseCourante);
 	IncrNbCaseZone(zNouveau);
 	g->tete=zNouveau;
 	Zone* temp=g->tete;
-	for(i=1;i<NombreCaseGrille(g);i++){
+	
+	for(i=1;i<NombreCaseGrille(g);i++){	//comptage du nombre de case dans chaque zone
 		zoneCaseCourante=ZoneCase(g,i);
 		while(temp->zSuivant!=NULL && NumZone(temp)!=zoneCaseCourante){
 			temp=ZoneSuivante(temp);
@@ -165,7 +163,7 @@ Grille* LireGrille(FILE* f){
 		if(NumZone(temp)==zoneCaseCourante){
 			IncrNbCaseZone(temp);
 		}
-		else {
+		else { //si la zone n'existe pas, on la cree
 			zNouveau=InitZone();
 			AffecterNumZone(zNouveau,zoneCaseCourante);
 			IncrNbCaseZone(zNouveau);
@@ -186,4 +184,5 @@ void AfficherGrille(Grille *g){
 		printf("\n");
 	}
 }
+
 

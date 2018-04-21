@@ -50,7 +50,7 @@ void AjoutClause(FNC* fnc, Clause *clause, int nbLitUtilises){
 	clause->cSuivant=fnc->c;
 	fnc->c=clause;
 	fnc->nbClauses++;
-	fnc->nbLit=nbLitUtilises;
+	fnc->nbLit=nbLitUtilises;	//utile pour ecrire l'entete
 	
 }
 
@@ -61,65 +61,55 @@ void Vers3SAT(FNC* fnc, Clause* c){
 	int varTot=NbLit(fnc);
 	int varAdd1=varTot+1;
 	int varAdd2=varAdd1+1;
-	
-	//printf("%d\n",nbLit );
 	if(nbLit==1){
-		varTot=varTot+2;
+		varTot=varTot+2;		//c={z1} donc c1'={{z1,y1,y2},{z1,y1,-y2},{z1,-y1,y2},{z1,-y1,-y2}}
 		Clause *nvellClause=CreerClause();
 		AjoutLiteral(nvellClause,c->litteral[0]);
 		AjoutLiteral(nvellClause,varAdd1);
 		AjoutLiteral(nvellClause,varAdd2);
 		AjoutClause(fnc,nvellClause,varTot);
-		//AfficherClause(nvellClause);
 
 		nvellClause=CreerClause();
 		AjoutLiteral(nvellClause,c->litteral[0]);
 		AjoutLiteral(nvellClause,-varAdd1);
 		AjoutLiteral(nvellClause,varAdd2);
 		AjoutClause(fnc,nvellClause,varTot);
-		//AfficherClause(nvellClause);
 
 		nvellClause=CreerClause();
 		AjoutLiteral(nvellClause,c->litteral[0]);
 		AjoutLiteral(nvellClause,varAdd1);
 		AjoutLiteral(nvellClause,-varAdd2);
 		AjoutClause(fnc,nvellClause,varTot);
-		//AfficherClause(nvellClause);
 
 		nvellClause=CreerClause();
 		AjoutLiteral(nvellClause,c->litteral[0]);
 		AjoutLiteral(nvellClause,-varAdd1);
 		AjoutLiteral(nvellClause,-varAdd2);
 		AjoutClause(fnc,nvellClause,varTot);
-		//AfficherClause(nvellClause);
 	}
 	else if(nbLit==2){
-		varTot++;
+		varTot++;		//c={z1,z2} donc c1'={{z1,z2,y1},{z1,z2,-y1}}
 		Clause *nvellClause=CreerClause();
 		AjoutLiteral(nvellClause,c->litteral[0]);
 		AjoutLiteral(nvellClause,c->litteral[1]);
 		AjoutLiteral(nvellClause,varAdd1);
 		AjoutClause(fnc,nvellClause,varTot);
-		//AfficherClause(nvellClause);
 
 		nvellClause=CreerClause();
 		AjoutLiteral(nvellClause,c->litteral[0]);
 		AjoutLiteral(nvellClause,c->litteral[1]);
 		AjoutLiteral(nvellClause,-varAdd1);
 		AjoutClause(fnc,nvellClause,varTot);
-		//AfficherClause(nvellClause);
 	}
 	else if(nbLit==3){
 		AjoutClause(fnc,c,varTot);
-		//AfficherClause(c);
 	}
-	else if(nbLit>3){
+	else if(nbLit>3){		//c={z1,z2,...,zi} donc c1'={{z1,z2,y1},{-y1,z3,y2} ...,{-yi,zi-1,zi}}
 		Clause *nvellClause=CreerClause();
 		AjoutLiteral(nvellClause,c->litteral[0]);
 		AjoutLiteral(nvellClause,c->litteral[1]);
 		AjoutLiteral(nvellClause,varAdd1);
 		AjoutClause(fnc,nvellClause,varTot);
-		//AfficherClause(nvellClause);
 
 		for(i=2;i<nbLit-2;i++){
 			nvellClause=CreerClause();
@@ -127,7 +117,6 @@ void Vers3SAT(FNC* fnc, Clause* c){
 			AjoutLiteral(nvellClause,c->litteral[i]);
 			AjoutLiteral(nvellClause,varAdd2);
 			AjoutClause(fnc,nvellClause,varTot);
-			//AfficherClause(nvellClause);
 
 			varAdd1++;
 			varAdd2++;
@@ -138,7 +127,6 @@ void Vers3SAT(FNC* fnc, Clause* c){
 		AjoutLiteral(nvellClause,c->litteral[i]);
 		AjoutLiteral(nvellClause,c->litteral[i+1]);
 		AjoutClause(fnc,nvellClause,varTot);
-		//AfficherClause(nvellClause);
 	}
 
 	else{

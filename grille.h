@@ -91,6 +91,5 @@ Grille* InitGrille(int hauteur, int largeur);
 Grille* LireGrille(FILE* fichier);
 
 //Affiche la grille donnée en parametre 
-
 void AfficherGrille(Grille *g);
 

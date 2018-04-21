@@ -18,4 +18,4 @@ all: $(PROGS)
 	$(CC) -o $@ $(CFLAGS) $(LDFLAGS) $^ $(LIBS)
 
 clean:
-	rm -f $(PROGS) *.o
+	rm -f $(PROGS) *.o dimacs.out

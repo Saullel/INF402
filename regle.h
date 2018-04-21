@@ -3,19 +3,21 @@
 #include "clauses.h"
 
 
-
+//traduit un numero de case et sa valeur un un litteral unique pour le fichier DIMACS
 int ValeurX(int numCase, int valeurCase, int nombreCasesTotal);
 
-//ecrit les valeur des cases pre-remplies
+//cree les clauses qui modelise les valeurs pré-remplies de la grille
 void ValeurDonnee(Grille *g,FNC* fnc);
 
-//ecrit dans le fichier DIMACS la valeur que peut prendre une case numCase de z (entre 1 et nbCase(z))
+//fonction recusrsive sur les zones
+//cree les clauses qui modelise la regle n°2
 void ValeurPossible(Grille* g, FNC* fnc, Zone* zoneCourante);
 
-//ecirt dans le fichier DIMACS la vleur que ne peut pas prednre la case numCase(i.e les autres valeurs que celles ecrites par la procedure valeurPossible)
+// fonction recusrsive sur les zones
+//cree les clauses qui modelise la regle n°3
 void ValeurImpossibleZone(Grille *g, FNC* fnc, Zone* zoneCourante);
 
-
+//cree les clauses qui modelise la regle n°4 
 void ValeurImpossibleCroix(Grille *g, FNC* fnc);
 
 void EcritureEntete(FILE* f, FNC* fnc);
