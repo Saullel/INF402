@@ -58,6 +58,8 @@ Zone* ZoneTete(Grille *g);
 //Recuperer le numero de la prochaine case d'une zone
 int CaseSuivanteZone(Grille *g, int numCase);
 
+int estMemeLigne(int numCase1,int numCase2, int largeur);
+
 //Recuperer le numero d'une zone donnee
 int NumZone(Zone* z);
 

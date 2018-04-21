@@ -56,6 +56,9 @@ int CaseSuivanteZone(Grille *g, int numCase){
 	else return i;
 }
 
+int estMemeLigne(int numCase1,int numCase2, int largeur){
+	return ((numCase1/largeur)==(numCase2/largeur));
+}
 
 Zone* ZoneTete(Grille *g){
 	return g->tete;
