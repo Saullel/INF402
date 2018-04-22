@@ -5,9 +5,9 @@
 CC = gcc
 CFLAGS = -Wall -Werror -g
 INCLUDE = grille.h regle.h clauses.h
-OBJS = grille.o regle.o clauses.o
+OBJS = grille.o regle.o clauses.o 
 
-PROGS = jeu
+PROGS = jeu resultat test
 
 all: $(PROGS)
 

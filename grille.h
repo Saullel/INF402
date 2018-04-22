@@ -46,6 +46,9 @@ int NombreCaseGrille(Grille *g);
 //Recuperer la valeur d'une case dans la grille
 int ValCase(Grille *g, int hauteurCase, int largeurCase);
 
+//Changer la valeur d'une case de la grille
+void ChangerValCase(Grille *g, int hauteurCase, int largeurCase, int valeur);
+
 //Recuperer le numero de zone d'une case donnee (calculée avec NumCase)
 int ZoneCase(Grille *g, int numCase);
 

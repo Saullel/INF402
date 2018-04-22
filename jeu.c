@@ -15,8 +15,6 @@ int main(int argc, char* argv[]){
 	Grille *g=LireGrille(fichier_grille);
 	fclose(fichier_grille);
 
-	AfficherGrille(g);			
-
 	int nbLitteraux=NombreCaseGrille(g)*CaseMaxZone(ZoneTete(g));
 	FNC* fnc=CreerFNC(nbLitteraux);
 

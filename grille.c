@@ -27,8 +27,13 @@ int NombreCaseZone(Zone *z){
 int NombreCaseGrille(Grille *g){
 	return LargeurGrille(g)*HauteurGrille(g);
 }
+
 int ValCase(Grille *g, int hauteurCase, int largeurCase){
 	return g->valeurCase[hauteurCase][largeurCase];
+}
+
+void ChangerValCase(Grille *g, int hauteurCase, int largeurCase, int valeur){
+	g->valeurCase[hauteurCase][largeurCase]=valeur;
 }
 
 int ZoneCase(Grille *g, int numCase){
