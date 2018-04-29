@@ -41,7 +41,7 @@ int ZoneCase(Grille *g, int numCase){
 }
 
 int NumCase(Grille *g, int hauteurCase, int largeurCase){
-	return hauteurCase*HauteurGrille(g)+largeurCase;
+	return hauteurCase*LargeurGrille(g)+largeurCase;
 }
 
 int CaseSuivanteZone(Grille *g, int numCase){
@@ -116,8 +116,8 @@ Grille* InitGrille(int hauteur, int largeur){
 	g->hauteur=hauteur;
 	g->nbZones=0;
 	g->tete=NULL;
-	for (i=0;i<HauteurGrille(g);i++){
-		for(j=0;j<LargeurGrille(g);j++){
+	for (i=0;i<hauteur;i++){
+		for(j=0;j<largeur;j++){
 			g->valeurCase[i][j]=0;
 		}
 
@@ -141,6 +141,7 @@ Grille* LireGrille(FILE* f){
 	for (i=0;i<HauteurGrille(g);i++){ //lecture des valeurs des cases
 		for(j=0;j<LargeurGrille(g);j++){
 			fscanf(f,"%d",&val);
+			//int cc=NumCase(g,i, j);
 			AffecterValeur(g,val,i,j);
 		}
 	}
@@ -210,13 +211,15 @@ void AfficherGrille(Grille *g){
 		zonePrecedente=zoneCourante;
 		zoneCourante=ZoneCase(g,numCase);
 		positionCase=numCase%LargeurGrille(g);
-		val=ValCase(g,(numCase-positionCase)/HauteurGrille(g),positionCase);
+		val=ValCase(g,(numCase-positionCase)/LargeurGrille(g),positionCase);
 		if(positionCase==0){
 			printf("\t\t\t\t|");
-			if (val==0)
+			if (val==0){
 				printf(" . ");
-			else
-				printf(" %d ",val );
+			}
+			else{
+				printf(" %d ",val);
+			}
 		}
 		else {
 			if(zonePrecedente==zoneCourante){
@@ -225,10 +228,12 @@ void AfficherGrille(Grille *g){
 			else{
 				printf("|");
 			}
-			if (val==0)
+			if (val==0){
 				printf(" . ");
-			else
-				printf(" %d ",val );			
+			}
+			else{
+				printf(" %d ",val);			
+			}
 			if (positionCase==LargeurGrille(g)-1){//gestion fin de ligne
 				printf("|\n\t\t\t\t");
 				for(i=1;i<=LargeurGrille(g);i++){
@@ -247,5 +252,4 @@ void AfficherGrille(Grille *g){
 	for(i=0;i<HauteurGrille(g);i++){
 		printf("\n");
 	}
-	
 }
